@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "lib": ["es5", "es6", "DOM", "ES2020", "DOM.Iterable"],
+    "outDir": "dist",
+    "strict": true,
+    "declaration": true,
+    "emitDeclarationOnly": true
+  },
+  "include": ["packages/*"],
+  "exclude": ["test/*"]
+}

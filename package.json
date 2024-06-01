@@ -1,0 +1,14 @@
+{
+  "name": "blur",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "packageManager": "yarn@4.2.2",
+  "scripts": {},
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
