@@ -4,7 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "packageManager": "yarn@4.2.2",
-  "scripts": {},
   "devDependencies": {
     "typescript": "^5.4.5"
   },

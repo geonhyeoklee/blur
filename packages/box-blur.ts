@@ -1,39 +1,46 @@
 import { get2DCanvas, getPixel, loadImage } from "./utils";
 import { clamp } from "./utils/math";
+import { Pixel } from "./types/pixel";
+
+const INTERPOLATION = 4;
+
+function convertToPixelsBuffer(imageData: Uint8ClampedArray): Pixel[] {
+  const pixelsBuffer: Pixel[] = [];
+  let pixelBuffer: number[] = [];
+  for (const data of imageData) {
+    pixelBuffer.push(data);
+
+    if (pixelBuffer.length === INTERPOLATION) {
+      pixelsBuffer.push(pixelBuffer as Pixel);
+      pixelBuffer = [];
+    }
+  }
+
+  return pixelsBuffer;
+}
 
 function getBoxBlurImageData(
-  data: Uint8ClampedArray,
+  imageData: Uint8ClampedArray,
   sw: number,
   sy: number,
   intensity?: number
 ): ImageData {
-  const INTERPOLATION = 4;
-
-  if (data.length % INTERPOLATION !== 0) {
+  if (imageData.length % INTERPOLATION !== 0) {
     throw new Error("It is Wrong image data.");
   }
 
-  if (data.length !== sw * sy * INTERPOLATION) {
+  if (imageData.length !== sw * sy * INTERPOLATION) {
     throw new Error("It is Wrong image data.");
   }
 
-  const pixelsBuffer: number[][] = [];
-  let pixelBuffer: number[] = [];
-  for (const value of data) {
-    pixelBuffer.push(value);
-
-    if (pixelBuffer.length === INTERPOLATION) {
-      pixelsBuffer.push(pixelBuffer);
-      pixelBuffer = [];
-    }
-  }
+  const pixelsBuffer = convertToPixelsBuffer(imageData);
 
   const clampedIntensity = clamp(intensity ?? 0.2, 0, 1);
 
   // 시간 복잡도 O(n^3), 공간 복잡도 O(n)
   for (let j = 0; j < sy; j++) {
     for (let i = 0; i < sw; i++) {
-      const neighborPixelSum = [0, 0, 0, 255];
+      const neighborPixelSum: Pixel = [0, 0, 0, 255];
 
       for (let si = 0; si < 5; si++) {
         const neighborPixel = getPixel(pixelsBuffer, sw, sy, i + si - 2, j);
