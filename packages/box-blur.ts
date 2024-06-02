@@ -2,11 +2,7 @@ import { getPixel, removeDecimalPoint } from "./utils";
 import { baseBlur } from "./core";
 import { Pixel, RGBA } from "./types/pixel";
 
-export async function boxBlur(imageUrl: string): Promise<ImageData> {
-  return await baseBlur(imageUrl, calculateBoxBlurPixelsBuffer);
-}
-
-function calculateBoxBlurPixelsBuffer(
+function applyBoxBlurEffect(
   pixelsBuffer: Pixel[],
   width: number,
   height: number
@@ -82,4 +78,8 @@ function calculateBoxBlurPixelsBuffer(
       );
     }
   }
+}
+
+export async function boxBlur(imageUrl: string): Promise<ImageData> {
+  return await baseBlur(imageUrl, applyBoxBlurEffect);
 }

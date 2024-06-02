@@ -52,16 +52,22 @@ async function extractOriginalImageData(imageUrl: string) {
   };
 }
 
+function checkInValidImageData(imageData: Uint8ClampedArray): void;
 function checkInValidImageData(
   imageData: Uint8ClampedArray,
   width: number,
   height: number
+): void;
+function checkInValidImageData(
+  imageData: Uint8ClampedArray,
+  width?: number,
+  height?: number
 ): void {
   if (imageData.length % INTERPOLATION !== 0) {
     throw new Error("It is Wrong image data.");
   }
 
-  if (imageData.length !== width * height * INTERPOLATION) {
+  if (width && height && imageData.length !== width * height * INTERPOLATION) {
     throw new Error("It is Wrong image data.");
   }
 }
