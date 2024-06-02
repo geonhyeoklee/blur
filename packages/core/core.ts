@@ -37,7 +37,10 @@ async function extractOriginalImageData(imageUrl: string) {
     naturalHeight: height,
   } = await loadImage(imageUrl);
 
-  const { ctx } = get2DCanvas();
+  const { ctx, canvas } = get2DCanvas();
+
+  canvas.width = width;
+  canvas.height = height;
 
   ctx.drawImage(image, 0, 0, width, height);
 
@@ -78,9 +81,13 @@ export const baseBlur = async (
 ) => {
   const { imageData, width, height } = await extractOriginalImageData(imageUrl);
 
+  console.log(imageData);
+
   const pixelsBuffer = convertToPixelsBuffer(imageData);
 
   effectFunc(pixelsBuffer, width, height);
+
+  console.log(pixelsBuffer);
 
   return convertToImageData(pixelsBuffer, width, height);
 };

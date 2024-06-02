@@ -1,6 +1,6 @@
 import { getPixel, removeDecimalPoint } from "./utils";
 import { baseBlur } from "./core";
-import { Pixel, RGBA } from "./types/pixel";
+import { Pixel } from "./types/pixel";
 
 function applyBoxBlurEffect(
   pixelsBuffer: Pixel[],
@@ -16,7 +16,7 @@ function applyBoxBlurEffect(
   // X축 적용
   for (let j = 0; j < height; j++) {
     for (let i = 0; i < width; i++) {
-      const neighborPixelSum: Pixel = [0, 0, 0, 255];
+      let neighborPixelSum: Pixel = [0, 0, 0, 255];
 
       for (let si = 0; si < MAX_NEIGHBOR; si++) {
         const neighborPixel = getPixel(
@@ -27,21 +27,21 @@ function applyBoxBlurEffect(
           j
         );
 
-        neighborPixelSum[RGBA.Red] += neighborPixel[RGBA.Red];
-        neighborPixelSum[RGBA.Green] += neighborPixel[RGBA.Green];
-        neighborPixelSum[RGBA.Blue] += neighborPixel[RGBA.Blue];
+        neighborPixelSum[0] += neighborPixel[0];
+        neighborPixelSum[1] += neighborPixel[1];
+        neighborPixelSum[2] += neighborPixel[2];
       }
 
       const targetPixelIndex = i + width * j;
 
-      pixelsBuffer[targetPixelIndex][RGBA.Red] = removeDecimalPoint(
-        neighborPixelSum[RGBA.Red] * INTENSITY
+      pixelsBuffer[targetPixelIndex][0] = removeDecimalPoint(
+        neighborPixelSum[0] * INTENSITY
       );
-      pixelsBuffer[targetPixelIndex][RGBA.Green] = removeDecimalPoint(
-        neighborPixelSum[RGBA.Green] * INTENSITY
+      pixelsBuffer[targetPixelIndex][1] = removeDecimalPoint(
+        neighborPixelSum[1] * INTENSITY
       );
-      pixelsBuffer[targetPixelIndex][RGBA.Blue] = removeDecimalPoint(
-        neighborPixelSum[RGBA.Blue] * INTENSITY
+      pixelsBuffer[targetPixelIndex][2] = removeDecimalPoint(
+        neighborPixelSum[2] * INTENSITY
       );
     }
   }
@@ -60,21 +60,21 @@ function applyBoxBlurEffect(
           j + si - MIDDLE_NEIGHBOR
         );
 
-        neighborPixelSum[RGBA.Red] += neighborPixel[RGBA.Red];
-        neighborPixelSum[RGBA.Green] += neighborPixel[RGBA.Green];
-        neighborPixelSum[RGBA.Blue] += neighborPixel[RGBA.Blue];
+        neighborPixelSum[0] += neighborPixel[0];
+        neighborPixelSum[1] += neighborPixel[1];
+        neighborPixelSum[2] += neighborPixel[2];
       }
 
       const targetPixelIndex = i + width * j;
 
-      pixelsBuffer[targetPixelIndex][RGBA.Red] = removeDecimalPoint(
-        neighborPixelSum[RGBA.Red] * INTENSITY
+      pixelsBuffer[targetPixelIndex][0] = removeDecimalPoint(
+        neighborPixelSum[0] * INTENSITY
       );
-      pixelsBuffer[targetPixelIndex][RGBA.Green] = removeDecimalPoint(
-        neighborPixelSum[RGBA.Green] * INTENSITY
+      pixelsBuffer[targetPixelIndex][1] = removeDecimalPoint(
+        neighborPixelSum[1] * INTENSITY
       );
-      pixelsBuffer[targetPixelIndex][RGBA.Blue] = removeDecimalPoint(
-        neighborPixelSum[RGBA.Blue] * INTENSITY
+      pixelsBuffer[targetPixelIndex][2] = removeDecimalPoint(
+        neighborPixelSum[2] * INTENSITY
       );
     }
   }
