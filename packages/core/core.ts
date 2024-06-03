@@ -81,13 +81,9 @@ export const baseBlur = async (
 ) => {
   const { imageData, width, height } = await extractOriginalImageData(imageUrl);
 
-  console.log(imageData);
-
   const pixelsBuffer = convertToPixelsBuffer(imageData);
 
-  effectFunc(pixelsBuffer, width, height);
-
-  console.log(pixelsBuffer);
+  await effectFunc(pixelsBuffer, width, height);
 
   return convertToImageData(pixelsBuffer, width, height);
 };

@@ -1,8 +1,27 @@
-import { getPixel, removeDecimalPoint } from "./utils";
-import { baseBlur } from "./core";
-import { Pixel } from "./types/pixel";
+type Pixel = [number, number, number, number];
 
-export function boxBlurEffect(
+function clamp(value: number, min: number, max: number) {
+  return Math.max(min, Math.min(value, max));
+}
+
+function removeDecimalPoint(value: number) {
+  return Math.floor(value);
+}
+
+function getPixel(
+  data: Pixel[],
+  width: number,
+  height: number,
+  i: number,
+  j: number
+): Pixel {
+  i = clamp(i, 0, width - 1);
+  j = clamp(j, 0, height - 1);
+
+  return data[i + width * j];
+}
+
+function boxBlurEffect(
   pixelsBuffer: Pixel[],
   width: number,
   height: number
@@ -80,42 +99,12 @@ export function boxBlurEffect(
   }
 }
 
-async function boxBlurEffectInWorker(
-  pixelsBuffer: Pixel[],
-  width: number,
-  height: number
-): Promise<Pixel[]> {
-  if (!window.Worker) {
-    throw new Error("Not found worker");
-  }
+self.onmessage = async (e: MessageEvent) => {
+  const pixelsBuffer = e.data.pixelsBuffer;
+  const width = e.data.width;
+  const height = e.data.height;
 
-  const WORKER_URL = "./box-blur-worker.ts";
+  boxBlurEffect(pixelsBuffer, width, height);
 
-  //@ts-ignore
-  const worker = new Worker(new URL(WORKER_URL, import.meta.url));
-  worker.postMessage({
-    pixelsBuffer,
-    width,
-    height,
-  });
-
-  return await new Promise<Pixel[]>((resolve) => {
-    worker.onmessage = (e: MessageEvent<Pixel[]>) => {
-      resolve(e.data);
-    };
-  });
-}
-
-export async function boxBlur(
-  imageUrl: string,
-  options: {
-    worker: boolean;
-  }
-): Promise<ImageData> {
-  const isInWorker = options.worker;
-
-  return await baseBlur(
-    imageUrl,
-    isInWorker ? boxBlurEffectInWorker : boxBlurEffect
-  );
-}
+  self.postMessage(pixelsBuffer);
+};
