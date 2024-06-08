@@ -1,1 +1,1 @@
-export * from "./BoxBlur";
+export * from './BoxBlur'

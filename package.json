@@ -2,7 +2,8 @@
   "name": "blur",
   "scripts": {
     "js": "pnpm --filter ./packages/js",
-    "example": "pnpm --filter ./packages/example"
+    "example": "pnpm --filter ./packages/example",
+    "prettier": "prettier --write packages/*"
   },
   "devDependencies": {
     "prettier": "^3.3.1",
