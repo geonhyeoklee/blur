@@ -1,6 +1,5 @@
 {
   "name": "blur",
-  "license": "MIT",
   "scripts": {
     "js": "pnpm --filter ./packages/js",
     "example": "pnpm --filter ./packages/example"

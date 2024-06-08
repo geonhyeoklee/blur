@@ -1,7 +1,6 @@
 {
+  "extends": "../tsconfig.settings.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "target": "ESNext",
     "lib": ["esnext", "dom"],
     "noImplicitAny": true,
     "declaration": true,

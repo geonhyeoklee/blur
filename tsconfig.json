@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "lib": ["esnext", "dom"],
+    "module": "CommonJS",
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
     "noImplicitAny": true,
     "declaration": true,
     "sourceMap": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": ["react", "node"],
-    "typeRoots": ["node_modules/@types"]
+    // "types": ["react", "node"],
+    // "typeRoots": ["node_modules/@types"]
   },
   "exclude": ["node_modules"]
 }
