@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.BoxBlur = void 0;
-const utils_1 = require("./utils");
+import { get2DCanvas, getPixel, loadImage, removeDecimalPoint } from "./utils";
 class Blur {
     imageUrl;
     interpolation = 4;
@@ -18,8 +15,8 @@ class Blur {
         return this.convertToImageData(pixelsBuffer, width, height);
     }
     extractOriginalImageData = async (imageUrl) => {
-        const { image, naturalWidth: width, naturalHeight: height, } = await (0, utils_1.loadImage)(imageUrl);
-        const { ctx, canvas } = (0, utils_1.get2DCanvas)();
+        const { image, naturalWidth: width, naturalHeight: height, } = await loadImage(imageUrl);
+        const { ctx, canvas } = get2DCanvas();
         canvas.width = width;
         canvas.height = height;
         ctx.drawImage(image, 0, 0, width, height);
@@ -57,7 +54,7 @@ class Blur {
         }
     }
 }
-class BoxBlur extends Blur {
+export class BoxBlur extends Blur {
     imageUrl;
     options;
     workerUrl = "./workers/box-blur-worker.ts";
@@ -132,4 +129,3 @@ class BoxBlur extends Blur {
         });
     }
 }
-exports.BoxBlur = BoxBlur;

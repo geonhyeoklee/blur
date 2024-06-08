@@ -1,5 +1,5 @@
 import "./style.css";
-import { BoxBlur } from "../../js/build";
+import { BoxBlur } from "box-blur";
 
 const imageUrl = "/sample.jpeg";
 

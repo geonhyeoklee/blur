@@ -1,5 +1,5 @@
-import { get2DCanvas, loadImage } from "./utils";
-import * as Comlink from "comlink";
+import { get2DCanvas, getPixel, loadImage, removeDecimalPoint } from "./utils";
+import { Pixel } from "./types";
 
 class Blur {
   protected interpolation = 4 as const;

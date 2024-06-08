@@ -14,6 +14,9 @@ importers:
 
   packages/example:
     devDependencies:
+      box-blur:
+        specifier: workspace:*
+        version: link:../js
       vite:
         specifier: ^5.2.0
         version: 5.2.13

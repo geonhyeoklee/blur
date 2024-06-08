@@ -1,3 +1,4 @@
+import { Pixel } from "./types";
 declare class Blur {
     protected imageUrl: string;
     protected interpolation: 4;

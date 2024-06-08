@@ -2,7 +2,8 @@
   "name": "blur",
   "license": "MIT",
   "scripts": {
-    "build": "tsc -b packages"
+    "js": "pnpm --filter ./packages/js",
+    "example": "pnpm --filter ./packages/example"
   },
   "devDependencies": {
     "typescript": "^5.4.5"

@@ -1,4 +1,3 @@
-.yarn
-.pnp.cjs
-test
 node_modules
+build
+example

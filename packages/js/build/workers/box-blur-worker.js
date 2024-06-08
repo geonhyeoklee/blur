@@ -1,3 +1,4 @@
+"use strict";
 self.onmessage = async (e) => {
     const pixelsBuffer = e.data.pixelsBuffer;
     const width = e.data.width;
