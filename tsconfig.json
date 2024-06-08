@@ -1,12 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "CommonJS",
-    "lib": ["es5", "es6", "DOM", "ES2020", "DOM.Iterable"],
-    "outDir": "dist",
-    "strict": true,
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["esnext", "dom"],
+    "noImplicitAny": true,
     "declaration": true,
-    "emitDeclarationOnly": true
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": ["react", "node"],
+    "typeRoots": ["node_modules/@types"]
   },
-  "include": ["packages/*"]
+  "exclude": ["node_modules"]
 }

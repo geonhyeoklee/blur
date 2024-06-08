@@ -1,13 +1,15 @@
 {
   "name": "blur",
-  "version": "0.0.1",
-  "main": "index.js",
   "license": "MIT",
-  "packageManager": "yarn@4.2.2",
+  "scripts": {
+    "build": "tsc -b packages"
+  },
   "devDependencies": {
     "typescript": "^5.4.5"
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "packageManager": "pnpm@9.2.0",
+  "private": true
 }

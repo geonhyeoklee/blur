@@ -1,0 +1,5 @@
+{
+  "files": [],
+  // "references": [{ "path": "js" }, { "path": "react" }]
+  "references": [{ "path": "js" }]
+}
