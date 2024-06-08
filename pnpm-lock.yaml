@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      prettier:
+        specifier: ^3.3.1
+        version: 3.3.1
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
@@ -275,6 +278,11 @@ packages:
     resolution: {integrity: sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==}
     engines: {node: ^10 || ^12 || >=14}
 
+  prettier@3.3.1:
+    resolution: {integrity: sha512-7CAwy5dRsxs8PHXT3twixW9/OEll8MLE0VRPCJyl7CkS6VHGPSlsVaWTiASPTyGyYRyApxlaWTzwUxVNrhcwDg==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   rollup@4.18.0:
     resolution: {integrity: sha512-QmJz14PX3rzbJCN1SG4Xe/bAAX2a6NpCP8ab2vfu2GiUr8AQcr2nCV/oEO3yneFarB67zk8ShlIyWb2LGTb3Sg==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
@@ -478,6 +486,8 @@ snapshots:
       nanoid: 3.3.7
       picocolors: 1.0.1
       source-map-js: 1.2.0
+
+  prettier@3.3.1: {}
 
   rollup@4.18.0:
     dependencies:
