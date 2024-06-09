@@ -77,8 +77,6 @@ class Blur {
 }
 
 export class BoxBlur extends Blur {
-  private workerUrl = new URL('./workers/box-blur-worker.ts', import.meta.url)
-
   constructor(
     protected imageUrl: string,
     private options: {
@@ -94,10 +92,6 @@ export class BoxBlur extends Blur {
 
   async run() {
     return await this.blur(this.imageUrl, this.boxBlurEffect)
-  }
-
-  async runWithWorker() {
-    return await this.blur(this.imageUrl, this.boxBlurEffectInWorker)
   }
 
   private async boxBlurEffect(pixelsBuffer: Pixel[], width: number, height: number): Promise<void> {
@@ -148,25 +142,5 @@ export class BoxBlur extends Blur {
         pixelsBuffer[targetPixelIndex][2] = removeDecimalPoint(neighborPixelSum[2] * INTENSITY)
       }
     }
-  }
-
-  private async boxBlurEffectInWorker(pixelsBuffer: Pixel[], width: number, height: number): Promise<void> {
-    if (!window.Worker) {
-      throw new Error('Not found worker')
-    }
-
-    const worker = new Worker(this.workerUrl)
-
-    worker.postMessage({
-      pixelsBuffer,
-      width,
-      height,
-    })
-
-    return await new Promise<void>(resolve => {
-      worker.onmessage = () => {
-        resolve()
-      }
-    })
   }
 }
