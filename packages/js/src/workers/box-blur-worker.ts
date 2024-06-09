@@ -1,4 +1,5 @@
-type Pixel = [number, number, number, number]
+import { Pixel } from '../types'
+import { getPixel, removeDecimalPoint } from '../utils'
 
 self.onmessage = async (e: MessageEvent) => {
   const pixelsBuffer = e.data.pixelsBuffer
@@ -60,17 +61,17 @@ function boxBlurEffect(pixelsBuffer: Pixel[], width: number, height: number): vo
   }
 }
 
-function removeDecimalPoint(value: number) {
-  return Math.floor(value)
-}
+// function removeDecimalPoint(value: number) {
+//   return Math.floor(value)
+// }
 
-function getPixel(data: Pixel[], width: number, height: number, i: number, j: number): Pixel {
-  i = clamp(i, 0, width - 1)
-  j = clamp(j, 0, height - 1)
+// function getPixel(data: Pixel[], width: number, height: number, i: number, j: number): Pixel {
+//   i = clamp(i, 0, width - 1)
+//   j = clamp(j, 0, height - 1)
 
-  return data[i + width * j]
-}
+//   return data[i + width * j]
+// }
 
-function clamp(value: number, min: number, max: number) {
-  return Math.max(min, Math.min(value, max))
-}
+// function clamp(value: number, min: number, max: number) {
+//   return Math.max(min, Math.min(value, max))
+// }

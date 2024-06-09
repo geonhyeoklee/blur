@@ -1,13 +1,16 @@
 {
   "name": "box-blur",
+  "private": true,
   "version": "1.0.0",
-  "main": "./build/index.js",
+  "type": "module",
+  "main": "./dist/box-blur.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "prebuild": "rm -rf ./build",
-    "build": "tsc"
+    "build": "tsc && vite build"
   },
-  "license": "MIT",
-  "dependencies": {
-    "comlink": "^4.4.1"
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.9.1"
   }
 }

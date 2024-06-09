@@ -1,3 +1,5 @@
+import { Pixel } from './types'
+
 export function get2DCanvas(): Readonly<{
   canvas: HTMLCanvasElement
   ctx: CanvasRenderingContext2D

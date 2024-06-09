@@ -77,7 +77,7 @@ class Blur {
 }
 
 export class BoxBlur extends Blur {
-  private workerUrl = './workers/box-blur-worker.ts' as const
+  private workerUrl = new URL('./workers/box-blur-worker.ts', import.meta.url)
 
   constructor(
     protected imageUrl: string,
@@ -155,8 +155,7 @@ export class BoxBlur extends Blur {
       throw new Error('Not found worker')
     }
 
-    //@ts-ignore
-    const worker = new Worker(new URL(this.workerUrl, import.meta.url))
+    const worker = new Worker(this.workerUrl)
 
     worker.postMessage({
       pixelsBuffer,

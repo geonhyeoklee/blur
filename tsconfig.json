@@ -3,7 +3,6 @@
     "module": "CommonJS",
     "target": "ESNext",
     "lib": ["ESNext", "DOM"],
-    "noImplicitAny": true,
     "declaration": true,
     "sourceMap": true,
     "experimentalDecorators": true,
@@ -11,5 +10,5 @@
     // "types": ["react", "node"],
     // "typeRoots": ["node_modules/@types"]
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "__tests__"]
 }

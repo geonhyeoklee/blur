@@ -5,4 +5,4 @@ type Alpha<T extends number = number> = T
 
 type Pixel = [Red, Green, Blue, Alpha]
 
-export { Pixel }
+export type { Pixel }
