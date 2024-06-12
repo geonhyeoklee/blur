@@ -76,17 +76,19 @@ class Blur {
   }
 }
 
+type Options = {
+  worker: boolean
+}
+
 export class BoxBlur extends Blur {
   constructor(
     protected imageUrl: string,
-    private options: {
-      worker: boolean
-    },
+    private options: Options,
   ) {
     super(imageUrl)
   }
 
-  getOptions() {
+  getOptions(): Options {
     return this.options
   }
 
