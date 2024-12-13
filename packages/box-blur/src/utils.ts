@@ -9,12 +9,12 @@ export function get2DCanvas(): Readonly<{
   return { canvas, ctx }
 }
 
-export async function loadImage(url: string): Promise<{
+export function loadImage(url: string): Promise<{
   image: HTMLImageElement
   naturalWidth: number
   naturalHeight: number
 }>
-export async function loadImage(
+export function loadImage(
   url: string,
   width: number,
 ): Promise<{
@@ -22,7 +22,7 @@ export async function loadImage(
   naturalWidth: number
   naturalHeight: number
 }>
-export async function loadImage(
+export function loadImage(
   url: string,
   width: number,
   height: number,
@@ -31,7 +31,7 @@ export async function loadImage(
   naturalWidth: number
   naturalHeight: number
 }>
-export async function loadImage(
+export function loadImage(
   url: string,
   width?: number,
   height?: number,

@@ -3,8 +3,11 @@ import { Pixel } from './types'
 
 class BaseBlur {
   protected interpolation = 4 as const
+  protected imageUrl: string;
 
-  constructor(protected imageUrl: string) {}
+  constructor(initialImageUrl: string) {
+    this.imageUrl = initialImageUrl;
+  }
 
   getImageUrl() {
     return this.imageUrl
@@ -92,8 +95,8 @@ export class BoxBlur extends BaseBlur {
     return this.options
   }
 
-  async run() {
-    return await this.blur(this.imageUrl, this.boxBlurEffect)
+  run() {
+    return this.blur(this.imageUrl, this.boxBlurEffect)
   }
 
   private async boxBlurEffect(pixelsBuffer: Pixel[], width: number, height: number): Promise<void> {
