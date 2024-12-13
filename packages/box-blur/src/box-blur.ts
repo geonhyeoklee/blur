@@ -1,10 +1,13 @@
 import { get2DCanvas, getPixel, loadImage, removeDecimalPoint } from './utils'
 import { Pixel } from './types'
 
-class Blur {
+class BaseBlur {
   protected interpolation = 4 as const
+  protected imageUrl: string;
 
-  constructor(protected imageUrl: string) {}
+  constructor(initialImageUrl: string) {
+    this.imageUrl = initialImageUrl;
+  }
 
   getImageUrl() {
     return this.imageUrl
@@ -80,7 +83,7 @@ type Options = {
   worker: boolean
 }
 
-export class BoxBlur extends Blur {
+export class BoxBlur extends BaseBlur {
   constructor(
     protected imageUrl: string,
     private options: Options,
@@ -92,8 +95,8 @@ export class BoxBlur extends Blur {
     return this.options
   }
 
-  async run() {
-    return await this.blur(this.imageUrl, this.boxBlurEffect)
+  run() {
+    return this.blur(this.imageUrl, this.boxBlurEffect)
   }
 
   private async boxBlurEffect(pixelsBuffer: Pixel[], width: number, height: number): Promise<void> {
@@ -101,8 +104,8 @@ export class BoxBlur extends Blur {
     const MIDDLE_NEIGHBOR = Math.floor(MAX_NEIGHBOR / 2)
     const INTENSITY = 1 / MAX_NEIGHBOR
 
-    // TODO: 시간 복잡도 개선 필요
-    // 시간 복잡도 O(n^3), 공간 복잡도 O(n)
+    // TODO: 복잡도 개선 필요
+    // 시간 복잡도 O(n^2), 공간 복잡도 O(n)
     // X축 적용
     for (let j = 0; j < height; j++) {
       for (let i = 0; i < width; i++) {
